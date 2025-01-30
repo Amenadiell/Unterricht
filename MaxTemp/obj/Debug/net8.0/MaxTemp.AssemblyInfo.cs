@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MaxTemp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c1cdbf2e3b87a1f1e982f65537e1286170f6156")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e3baaf440b2ef2926b458858350f698e43571ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("MaxTemp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MaxTemp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
