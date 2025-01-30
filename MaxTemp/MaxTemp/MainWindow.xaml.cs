@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,6 +35,8 @@ namespace MaxTemp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        
+
         private void BtnAuswerten_Click(object sender, RoutedEventArgs e)
         {
             //Zugriff auf Datei erstellen.
@@ -49,9 +52,33 @@ namespace MaxTemp
 
             //Höchstwert auf Oberfläche ausgeben.
 
-            MessageBox.Show("Gleich kachelt das Programm...");
-            //kommentieren Sie die Exception aus.
-            throw new Exception("peng");
+        static List<String[]> ReadCSVFile(string path) 
+        {
+                List<String[]> rows = new List<string[]>();
+                try 
+                {
+                    string[] lines = File.ReadAllLines(path);
+
+                    foreach (string line in lines)
+                    {
+                        string[] values = line.Split(",");
+                        
+                        
+                        rows.Add(values);
+                    }
+                    Console.WriteLine("CSV File read successfully");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"An Error occured {e.Message}");
+                }
+                return rows;
+            }
+
+
+        MessageBox.Show("Gleich kachelt das Programm...");
+        //kommentieren Sie die Exception aus.
+        throw new Exception("peng");
         }
     }
 }
