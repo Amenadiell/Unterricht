@@ -18,6 +18,57 @@ using System.Windows.Shapes;
 
 namespace MaxTemp
 {
+
+public class SensorReading
+{
+    public string Sensor { get; set; }
+    public DateTime Timestamp { get; set; }
+    public double Temperature { get; set; }
+    
+}
+
+    public List<SensorReading> ReadSensorData(string filePath)
+    {
+        List<SensorReading> readings = new List<SensorReading>();
+
+        try
+        {
+            using (var reader = new StreamReader(filePath))
+            {
+                
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    if (values.Length != 3)
+                        continue;
+                    
+
+                    if (DateTime.TryParse(values[1], out DateTime timestamp) &&
+                        double.TryParse(values[2], NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
+                    {
+                        readings.Add(new SensorReading
+                        {
+                            Sensor = values[0],
+                            Timestamp = timestamp,
+                            Temperature = temperature
+                        });
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Skipped invalid row: {line}");
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+¥≤a                 Console.WriteLine($"Error reading file: {ex.Message}");
+        }
+
+        return readings;
+    }
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
@@ -39,41 +90,12 @@ namespace MaxTemp
 
         private void BtnAuswerten_Click(object sender, RoutedEventArgs e)
         {
-            //Zugriff auf Datei erstellen.
-
-            //Anfangswert setzen, um sinnvoll vergleichen zu können.
-
-
-            //In einer Schleife die Werte holen und auswerten. Den größten Wert "merken".
-
-
-            //Datei wieder freigeben.
-
-
-            //Höchstwert auf Oberfläche ausgeben.
-
-        static List<String[]> ReadCSVFile(string path) 
+            var data = ReadSensorData("temps.csv");
+            foreach(var Element in data)
         {
-                List<String[]> rows = new List<string[]>();
-                try 
-                {
-                    string[] lines = File.ReadAllLines(path);
+            
+        }
 
-                    foreach (string line in lines)
-                    {
-                        string[] values = line.Split(",");
-                        
-                        
-                        rows.Add(values);
-                    }
-                    Console.WriteLine("CSV File read successfully");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"An Error occured {e.Message}");
-                }
-                return rows;
-            }
 
 
         MessageBox.Show("Gleich kachelt das Programm...");
