@@ -31,7 +31,8 @@ public class SensorDataProcessor
     public Dictionary<string, List<SensorReading>> ReadSensorData(string filePath)
     {
         Dictionary<string, List<SensorReading>> sensorData = new Dictionary<string, List<SensorReading>>()
-        {
+        {  
+            // Neue Listen pro sensor
             { "S1", new List<SensorReading>() },
             { "S2", new List<SensorReading>() },
             { "S3", new List<SensorReading>() },
@@ -40,7 +41,7 @@ public class SensorDataProcessor
         };
 
         try
-        {
+        {   //File lesen 
             using (var reader = new StreamReader(filePath))
             {
                 while (!reader.EndOfStream)
@@ -50,7 +51,7 @@ public class SensorDataProcessor
 
                     if (values.Length != 3)
                         continue;
-
+    
                     if (DateTime.TryParse(values[1], out DateTime timestamp) &&
                         double.TryParse(values[2], NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
                     {
