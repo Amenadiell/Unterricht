@@ -1,0 +1,47 @@
+﻿<Window x:Class="Balkendiagramm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Balkendiagramm" Height="300" Width="1200">
+
+	<Grid Margin="20">
+		<!-- Y-Achse -->
+		<Rectangle Fill="Black" Width="2" Height="300" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="40,0,0,20"/>
+
+		<!-- Y-Achsenbeschriftung -->
+		<ItemsControl ItemsSource="{Binding YAxisLabels}" Margin="10,0,0,20">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Vertical" VerticalAlignment="Bottom"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding}" FontSize="12" HorizontalAlignment="Left" Margin="0,0,5,0"/>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+
+		<!-- X-Achse -->
+		<Rectangle Fill="Black" Height="2" Width="1030" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="40,0,0,20"/>
+
+		<!-- Balkendiagramm -->
+		<ItemsControl ItemsSource="{Binding FilteredItems}" Margin="40,0,0,20">
+			<ItemsControl.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
+				</ItemsPanelTemplate>
+			</ItemsControl.ItemsPanel>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<StackPanel VerticalAlignment="Bottom" Margin="5,0">
+						<!-- Balken -->
+						<Rectangle Fill="SteelBlue" Width="20" Height="{Binding Value}" />
+
+						<!-- X-Achsen-Beschriftung -->
+						<TextBlock Text="{Binding Name}" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+					</StackPanel>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</Grid>
+</Window>
