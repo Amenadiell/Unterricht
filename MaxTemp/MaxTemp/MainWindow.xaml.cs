@@ -51,7 +51,7 @@ public class SensorDataProcessor
 
                     if (values.Length != 3)
                         continue;
-    
+
                     if (DateTime.TryParse(values[1], out DateTime timestamp) &&
                         double.TryParse(values[2], NumberStyles.Any, CultureInfo.InvariantCulture, out double temperature))
                     {
@@ -100,6 +100,21 @@ public class SensorDataProcessor
         }
 
         return highestReadings;
+    }
+    public Dictonary<string, SensorReading> GetLowestTemperaturReadings(Dictionary<string,List<SensorReading>> sensordata)
+    {
+        Dictionary<string, SensorReading> lowestReadings new Dictionary<string,SensorReading>();
+
+        foreach(var sensor in sensordata)
+        {
+            if (sensor.Value.Count > 0)
+            {
+                var minReading = sensor.Value.OrderbyAscending(r => r.Temperature).First();
+                lowestReadings[sensor.Key] = minReading;
+            }
+        }
+
+        return lowestReadings;
     }
 }
     /// <summary>
